@@ -52,15 +52,35 @@ conventions in `E:\CLAUDE\COMPANY\GOALS.md`.
       custom-wax option with no sanity ceiling, and overstated IFRA
       framing. ✔ 2026-09-10 — see `docs/domain-reference.md` and
       `HANDOVER.md` D6.
-- [ ] M2 — Ship: git init, security review, push via `init-repo.ps1`,
+- [x] M2 — Ship: git init, security review, push via `init-repo.ps1`,
       deploy via `deploy-service.ps1`, verify live, update hub page and
-      sitemap index.
+      sitemap index. ✔ 2026-09-10 —
+      https://candle-fragrance-calculator.svc.julienika.cz.
 - [ ] M3 — Monetization once an ad account exists for this domain (already
       wired via the shared `ADSENSE_PUBLISHER_ID` env var, awaiting
       AdSense's own per-domain approval, same as every other svc-lab
       service).
 
 **Progress log** (newest first):
+- 2026-09-10 — M2 complete this run. Manual security review (clean, no
+  findings — `/security-review`'s `origin/HEAD` precondition can't run
+  before a GitHub remote exists, same known gap as several sibling
+  services). Pushed via `init-repo.ps1`
+  (https://github.com/yunniko/candle-fragrance-calculator, public) and
+  deployed via `deploy-service.ps1` on the first attempt (port 30160) —
+  vhost, TLS, and live HTTPS verified by the script itself; every route
+  independently confirmed 200 via curl, sitemap/robots content checked
+  directly, two other live host sites confirmed unaffected. Hub page
+  (`julienika-home`) and sitemap index updated, pushed, and redeployed
+  the same run, verified live. SEO review via curl fallback (WebFetch
+  denied): per-page titles/descriptions, OG/Twitter tags, and FAQPage
+  JSON-LD all present and correct; no canonical tag, matching every
+  sibling service's template. **COMPANY-doc reconciliation needed** (this
+  automation doesn't edit `COMPANY\**` by design): add
+  `candle-fragrance-calculator` to `COMPANY\INFRASTRUCTURE_DEPLOY.md`'s
+  Company-projects table and port registry (app port `127.0.0.1:30160`,
+  no DB, domain `candle-fragrance-calculator.svc.julienika.cz`), and add
+  the project to `COMPANY\GOALS.md`'s project index.
 - 2026-09-10 — M1b complete this run. Domain-expert review of the
   candle-making fragrance-load chemistry/safety claims found six real,
   fixable issues — not just documentation gaps: (1) a UI display-rounding

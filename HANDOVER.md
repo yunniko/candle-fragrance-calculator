@@ -158,12 +158,30 @@ static FAQ objects (no user input) and escapes `<` defensively — identical
 to every sibling svc-lab service's own reviewed copy of this file. No
 findings.
 
+**D8 — Shipped 2026-09-10.** Pushed via `init-repo.ps1`
+(https://github.com/yunniko/candle-fragrance-calculator, public) and
+deployed via `deploy-service.ps1` on the first attempt (port 30160) —
+vhost, TLS, and live HTTPS verified by the script itself; every route
+(home, `/fragrance-calculator`, `/wax-fragrance-reference`,
+`/candle-cost-calculator`, `/ads.txt`, `/sitemap.xml`, `/robots.txt`)
+independently confirmed 200 via curl, sitemap/robots content checked
+directly, and two other live host sites (julienika.cz apex,
+soap-lye-calculator) confirmed unaffected. Hub page (`julienika-home`)
+and sitemap index updated, pushed, and redeployed the same run — verified
+live via curl (new tool card on julienika.cz, new sitemap entry in
+julienika.cz/sitemap-index.xml). SEO review (curl-fallback method,
+WebFetch denied): per-page unique titles/meta descriptions via the
+layout's title template, Open Graph and Twitter card tags present,
+FAQPage JSON-LD valid on both content pages, sitemap.xml lists all 4
+routes, robots.txt correct — no canonical `<link>` tag, but that matches
+every sibling svc-lab service's own template, not a regression introduced
+here.
+
 ## Next steps and open questions
 
-- Shipping (M2) not yet done as of this writing.
-- Monetization: will be wired via the shared `ADSENSE_PUBLISHER_ID` env
-  var at deploy time, awaiting AdSense's own per-domain approval, same as
-  every other svc-lab service.
+- Monetization: wired via the shared `ADSENSE_PUBLISHER_ID` env var,
+  awaiting AdSense's own per-domain approval, same as every other
+  svc-lab service.
 - The domain-expert review flagged cure-time guidance and a direct check
   of wax technical data sheets (vs. this project's WebSearch-snippet
   sourcing) as worthwhile follow-ups if a future session gets WebFetch
