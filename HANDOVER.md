@@ -145,9 +145,22 @@ after every fix (not just trusted the pre-fix run): ESLint clean,
 production build clean, 21 Vitest unit tests, 11 Playwright e2e tests, all
 passing.
 
+**D7 — Security review (2026-09-10): manual equivalent, clean, no
+findings.** The `/security-review` skill's `origin/HEAD` precondition
+fails before a GitHub remote exists, same known gap already logged for
+several sibling services (see `svc-lab/HANDOVER.md`). Did a manual review
+instead: no API routes, no server-side data handling, no database, no
+auth, no `.env`/secrets in the commit (checked via `git ls-files` and a
+grep for common secret/credential filename patterns — none found). All
+form input stays client-side React state and is never sent to a server.
+The only `dangerouslySetInnerHTML` usage (`lib/json-ld.tsx`) serializes
+static FAQ objects (no user input) and escapes `<` defensively — identical
+to every sibling svc-lab service's own reviewed copy of this file. No
+findings.
+
 ## Next steps and open questions
 
-- Security review and shipping (M2) not yet done as of this writing.
+- Shipping (M2) not yet done as of this writing.
 - Monetization: will be wired via the shared `ADSENSE_PUBLISHER_ID` env
   var at deploy time, awaiting AdSense's own per-domain approval, same as
   every other svc-lab service.
